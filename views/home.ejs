@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Home</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
       integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
@@ -13,7 +13,24 @@
 
   <body>
     <div class="container">
-      <button hx-get="/info" hx-swap="outerHTML">Do something</button>
+      <div>
+        <button hx-get="/info" hx-swap="outerHTML">Display info here</button>
+      </div>
+      <div>
+        <button hx-get="/info" hx-target="#info-container">
+          Display info in a target
+        </button>
+      </div>
+      <div>
+        <button
+          hx-get="/info"
+          hx-target="#info-container"
+          hx-trigger="mouseenter[ctrlKey]"
+        >
+          Display info when mouse over + CTRL key
+        </button>
+      </div>
+      <div id="info-container">Information details displayed here</div>
     </div>
   </body>
 </html>
