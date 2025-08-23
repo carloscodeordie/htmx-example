@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home</title>
+    <title>Notes</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
@@ -14,23 +14,28 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>Home page</h1>
+        <h1>Notes page</h1>
       </div>
-      <div class="controls">
-        <button hx-get="/notes" hx-swap="outerHTML">Display notes here</button>
-        <button hx-get="/notes" hx-target="#notes-container">
-          Display notes in a target
-        </button>
-        <button
-          hx-get="/notes"
+      <div class="form-notes-container">
+        <form
+          class="form-notes"
+          hx-post="/notes"
           hx-target="#notes-container"
-          hx-trigger="mouseenter[ctrlKey]"
+          hx-swap="innerHTML"
         >
-          Display notes when mouse over + CTRL key
-        </button>
-        <div hx-boost="true">
-          <a href="/notes/new">Create a note</a>
-        </div>
+          <div class="field">
+            <label for="note">Note:</label>
+            <input
+              type="text"
+              id="note"
+              name="note"
+              placeholder="Enter a note"
+            />
+          </div>
+          <div class="form-action">
+            <button>Create a note</button>
+          </div>
+        </form>
       </div>
       <div id="notes-container" class="notes">Notes details displayed here</div>
     </div>

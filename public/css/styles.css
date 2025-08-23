@@ -13,10 +13,81 @@ body {
   color: white;
 }
 
+button {
+  background-color: lightskyblue;
+  border: 1px solid lightskyblue;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 .container {
   margin: 0;
 }
 
-.container .info-container {
-  background-color: cornsilk;
+.container .header {
+  border: 1px dashed gray;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.container .controls {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+
+.container .controls button {
+  width: 20rem;
+}
+
+.container .notes {
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 6px;
+  display: flex;
+  height: 10rem;
+  justify-content: center;
+}
+
+.container .form-notes-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.container .form-notes-container form {
+  border: 1px solid gray;
+  padding: 3rem 3rem 1rem 3rem;
+}
+
+.container .form-notes-container .form-notes .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 20rem;
+}
+
+.container .form-notes-container .form-notes .field label {
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.container .form-notes-container .form-notes .field input {
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  outline: none;
+}
+
+.container .form-notes-container .form-notes .form-action {
+  display: flex;
+  justify-content: center;
 }
