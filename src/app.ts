@@ -35,11 +35,7 @@ app.post("/notes", (req, res) => {
   // Save notes on memory
   NOTES.push(note);
 
-  res.send(`
-    <ul>
-      ${NOTES.map((note) => `<li>${note}</li>`).join("")}
-    </ul>
-  `);
+  res.redirect("/notes");
 });
 
 app.listen(port, () => {
