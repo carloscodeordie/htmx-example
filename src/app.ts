@@ -23,10 +23,27 @@ app.get("/notes/new", (req, res) => {
 
 app.get("/notes", (req, res) => {
   res.send(`
-    <ul>
-      ${NOTES.map((note) => `<li>${note}</li>`).join("")}
-    </ul>
+    <div class="notes-list">
+      ${NOTES.map(
+        (note, index) => `<div class="notes-list-item" id="note-${index}">
+          <span>${note}</span>
+          <button
+            hx-delete="/notes/${index}"
+            hx-target="#note-${index}"
+            hx-swap="outerHTML"
+          >Delete</button>
+        </div>`
+      ).join("")}
+    </div>
   `);
+});
+
+app.delete("/notes/:id", (req, res) => {
+  const { id } = req.params;
+
+  NOTES.splice(parseInt(id), 1);
+
+  res.send();
 });
 
 app.post("/notes", (req, res) => {
