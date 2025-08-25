@@ -16,8 +16,7 @@
       <div class="header">
         <h1>Home page</h1>
       </div>
-      <div class="controls">
-        <button hx-get="/notes" hx-swap="outerHTML">Display notes here</button>
+      <div class="controls" hx-swap="outerHTML">
         <button hx-get="/notes" hx-target="#notes-container">
           Display notes in a target
         </button>
