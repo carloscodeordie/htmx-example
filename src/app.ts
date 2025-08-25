@@ -25,11 +25,11 @@ app.get("/notes", (req, res) => {
   res.send(`
     <div class="notes-list">
       ${NOTES.map(
-        (note, index) => `<div class="notes-list-item" id="note-${index}">
-          <span>${note}</span>
+        (note) => `<div class="notes-list-item" id="note-${note.id}">
+          <span>${note.value}</span>
           <button
-            hx-delete="/notes/${index}"
-            hx-target="#note-${index}"
+            hx-delete="/notes/${note.id}"
+            hx-target="#note-${note.id}"
             hx-swap="outerHTML"
           >Delete</button>
         </div>`
@@ -41,7 +41,9 @@ app.get("/notes", (req, res) => {
 app.delete("/notes/:id", (req, res) => {
   const { id } = req.params;
 
-  NOTES.splice(parseInt(id), 1);
+  const noteIndex = NOTES.findIndex((note) => note.id === parseInt(id));
+
+  NOTES.splice(noteIndex, 1);
 
   res.send();
 });
@@ -50,7 +52,7 @@ app.post("/notes", (req, res) => {
   const { note } = req.body;
 
   // Save notes on memory
-  NOTES.push(note);
+  NOTES.push({ id: new Date().getTime(), value: note });
 
   res.redirect("/notes");
 });

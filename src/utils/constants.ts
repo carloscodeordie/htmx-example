@@ -1,1 +1,3 @@
-export const NOTES: string[] = [];
+import { Note } from "../models/interfaces";
+
+export const NOTES: Note[] = [];
