@@ -1,5 +1,6 @@
 import express from "express";
 import { NOTES } from "./utils/constants";
+import { createNoteItem } from "./components/note-item";
 const path = require("path");
 
 const app = express();
@@ -24,16 +25,7 @@ app.get("/notes/new", (req, res) => {
 app.get("/notes", (req, res) => {
   res.send(`
     <div class="notes-list">
-      ${NOTES.map(
-        (note) => `<div class="notes-list-item" id="note-${note.id}">
-          <span>${note.value}</span>
-          <button
-            hx-delete="/notes/${note.id}"
-            hx-target="#note-${note.id}"
-            hx-swap="outerHTML"
-          >Delete</button>
-        </div>`
-      ).join("")}
+      ${NOTES.map((note) => createNoteItem(note)).join("")}
     </div>
   `);
 });
@@ -54,7 +46,11 @@ app.post("/notes", (req, res) => {
   // Save notes on memory
   NOTES.push({ id: new Date().getTime(), value: note });
 
-  res.redirect("/notes");
+  res.send(`
+    <div class="notes-list">
+      ${NOTES.map((note) => createNoteItem(note)).join("")}
+    </div>
+  `);
 });
 
 app.listen(port, () => {
