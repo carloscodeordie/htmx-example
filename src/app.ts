@@ -47,7 +47,7 @@ app.post("/notes", (req, res) => {
   NOTES.push({ id: new Date().getTime(), value: note });
 
   res.send(`
-    <div class="notes-list">
+    <div class="notes-list" hx-confirm="Do you want to delete it?">
       ${NOTES.map((note) => createNoteItem(note)).join("")}
     </div>
   `);
