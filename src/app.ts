@@ -1,6 +1,11 @@
 import express from "express";
-import { NOTES } from "./utils/constants";
-import { createNoteItem } from "./components/note-item";
+import {
+  NOTES,
+  INTERESTING_LOCATIONS,
+  AVAILABLE_LOCATIONS,
+} from "./utils/constants";
+import { renderNoteItem } from "./components/note-item";
+import renderLocationsPage from "./components/location";
 const path = require("path");
 
 const app = express();
@@ -25,7 +30,7 @@ app.get("/notes/new", (req, res) => {
 app.get("/notes", (req, res) => {
   res.send(`
     <div class="notes-list">
-      ${NOTES.map((note) => createNoteItem(note)).join("")}
+      ${NOTES.map((note) => renderNoteItem(note)).join("")}
     </div>
   `);
 });
@@ -49,10 +54,37 @@ app.post("/notes", (req, res) => {
   setTimeout(() => {
     res.send(`
     <div class="notes-list" hx-confirm="Do you want to delete it?">
-      ${NOTES.map((note) => createNoteItem(note)).join("")}
+      ${NOTES.map((note) => renderNoteItem(note)).join("")}
     </div>
   `);
   }, 10000);
+});
+
+app.get("/locations", (req, res) => {
+  const availableLocations = AVAILABLE_LOCATIONS.filter(
+    (location) => !INTERESTING_LOCATIONS.includes(location)
+  );
+  res.send(renderLocationsPage(availableLocations, INTERESTING_LOCATIONS));
+});
+
+app.post("/places", (req, res) => {
+  const locationId = req.body.locationId;
+  const location = AVAILABLE_LOCATIONS.find((loc) => loc.id === locationId);
+  INTERESTING_LOCATIONS.push(location);
+
+  res.send(`
+    TODO
+  `);
+});
+
+app.delete("/places/:id", (req, res) => {
+  const locationId = req.params.id;
+  const locationIndex = INTERESTING_LOCATIONS.findIndex(
+    (loc) => loc.id === locationId
+  );
+  INTERESTING_LOCATIONS.splice(locationIndex, 1);
+
+  res.send();
 });
 
 app.listen(port, () => {
