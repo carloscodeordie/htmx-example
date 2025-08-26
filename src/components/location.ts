@@ -11,7 +11,12 @@ export default function renderLocationsPage(
         <title>Interesting Locations</title>
         <link rel="stylesheet" href="/css/styles.css" />
         <link rel="icon" href="/logo.png" />
-        <script src="/htmx.js" defer></script>
+        <script
+          src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
+          integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
+          crossorigin="anonymous"
+          defer
+        ></script>
       </head>
       <body>
         <header>

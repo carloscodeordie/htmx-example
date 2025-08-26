@@ -6,6 +6,7 @@ import {
 } from "./utils/constants";
 import { renderNoteItem } from "./components/note-item";
 import renderLocationsPage from "./components/location";
+import renderLocationItem from "./components/locationItem";
 const path = require("path");
 
 const app = express();
@@ -61,6 +62,7 @@ app.post("/notes", (req, res) => {
 });
 
 app.get("/locations", (req, res) => {
+  // Get data to populate the page
   const availableLocations = AVAILABLE_LOCATIONS.filter(
     (location) => !INTERESTING_LOCATIONS.includes(location)
   );
@@ -72,9 +74,7 @@ app.post("/places", (req, res) => {
   const location = AVAILABLE_LOCATIONS.find((loc) => loc.id === locationId);
   INTERESTING_LOCATIONS.push(location);
 
-  res.send(`
-    TODO
-  `);
+  res.send(renderLocationItem(location));
 });
 
 app.delete("/places/:id", (req, res) => {
