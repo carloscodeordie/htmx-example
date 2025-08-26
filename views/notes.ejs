@@ -22,6 +22,7 @@
           hx-post="/notes"
           hx-target="#notes-container"
           hx-swap="innerHTML"
+          hx-on:submit="setTimeout(() => this.reset(), 0)"
         >
           <div class="field">
             <label for="note">Note:</label>
@@ -33,7 +34,7 @@
             />
           </div>
           <div class="form-action">
-            <button>Create a note</button>
+            <button type="submit">Create a note</button>
           </div>
         </form>
       </div>
