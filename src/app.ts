@@ -46,11 +46,13 @@ app.post("/notes", (req, res) => {
   // Save notes on memory
   NOTES.push({ id: new Date().getTime(), value: note });
 
-  res.send(`
+  setTimeout(() => {
+    res.send(`
     <div class="notes-list" hx-confirm="Do you want to delete it?">
       ${NOTES.map((note) => createNoteItem(note)).join("")}
     </div>
   `);
+  }, 10000);
 });
 
 app.listen(port, () => {

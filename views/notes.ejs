@@ -22,7 +22,8 @@
           hx-post="/notes"
           hx-target="#notes-container"
           hx-swap="innerHTML"
-          hx-on:submit="setTimeout(() => this.reset(), 0)"
+          hx-on::after-request="this.reset()"
+          hx-disabled-elt="form button"
         >
           <div class="field">
             <label for="note">Note:</label>
