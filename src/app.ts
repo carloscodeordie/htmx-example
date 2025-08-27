@@ -62,10 +62,10 @@ app.post("/notes", (req, res) => {
 });
 
 app.get("/locations", (req, res) => {
-  // Get data to populate the page
   const availableLocations = AVAILABLE_LOCATIONS.filter(
     (location) => !INTERESTING_LOCATIONS.includes(location)
   );
+  // Return a fragment of the screen
   res.send(renderLocationsPage(availableLocations, INTERESTING_LOCATIONS));
 });
 
@@ -74,7 +74,7 @@ app.post("/places", (req, res) => {
   const location = AVAILABLE_LOCATIONS.find((loc) => loc.id === locationId);
   INTERESTING_LOCATIONS.push(location);
 
-  res.send(renderLocationItem(location));
+  res.send(renderLocationItem(location, false));
 });
 
 app.delete("/places/:id", (req, res) => {

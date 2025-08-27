@@ -1,4 +1,4 @@
-import renderLocationIten from "./locationItem";
+import renderLocationItem from "./locationItem";
 
 export default function renderLocationsPage(
   availableLocations,
@@ -32,7 +32,7 @@ export default function renderLocationsPage(
             <h2>My Dream Locations</h2>
             <ul id="interesting-locations" class="locations">
               ${interestingLocations
-                .map((location) => renderLocationIten(location))
+                .map((location) => renderLocationItem(location, false))
                 .join("")}
             </ul>
           </section>
@@ -41,7 +41,7 @@ export default function renderLocationsPage(
             <h2>Available Locations</h2>
             <ul id="available-locations" class="locations">
               ${availableLocations
-                .map((location) => renderLocationIten(location))
+                .map((location) => renderLocationItem(location))
                 .join("")}
             </ul>
           </section>
