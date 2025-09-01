@@ -10,7 +10,7 @@ export default function renderLocationItem(
     attributes = `
       hx-post="/places"
       hx-target="#interesting-locations"
-      hx-swap="beforeend"
+      hx-swap="beforeend show:#interesting-locations-section:top"
       hx-vals='{"locationId": "${location.id}"}'
     `;
   } else {

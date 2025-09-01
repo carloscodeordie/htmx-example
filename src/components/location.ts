@@ -28,7 +28,7 @@ export default function renderLocationsPage(
           </p>
         </header>
         <main>
-          <section class="locations-category">
+          <section id="interesting-locations-section" class="locations-category">
             <h2>My Dream Locations</h2>
             <ul id="interesting-locations" class="locations">
               ${interestingLocations
