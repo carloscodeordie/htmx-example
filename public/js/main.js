@@ -1,3 +1,6 @@
+// Customize HTMX default behavior
+htmx.config.defaultSwapStyle = "innerHTML";
+
 const showConfirmationModal = (event) => {
   // prevent the modal to be rendered for suggested locations
   if (event.detail.path === "/suggested-locations") {

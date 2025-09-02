@@ -17,7 +17,6 @@ export default function renderLocationItem(
   } else {
     attributes = `
       hx-delete="/places/${location.id}"
-      hx-confirm="Are you sure you want to delete?"
       hx-target="closest li"
       hx-swap="outerHTML"
       data-action="delete"
