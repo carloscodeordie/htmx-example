@@ -18,9 +18,10 @@ export default function renderLocationsPage(
           crossorigin="anonymous"
           defer
         ></script>
+        <script src="js/extensions/htmx-debug.js" defer></script>
         <script src="js/main.js" defer></script>
       </head>
-      <body>
+      <body hx-ext="debug">
         <header>
           <img src="/logo.png" alt="Stylized globe" />
           <h1>PlacePicker</h1>
