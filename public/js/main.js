@@ -1,5 +1,11 @@
 const showConfirmationModal = (event) => {
+  // prevent the modal to be rendered for suggested locations
+  if (event.detail.path === "/suggested-locations") {
+    return;
+  }
+
   event.preventDefault();
+
   const action = event.detail.elt.dataset.action;
   const confirmationModal = `
     <dialog class="modal">

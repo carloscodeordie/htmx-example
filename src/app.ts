@@ -91,7 +91,11 @@ app.post("/places", (req, res) => {
   res.send(`
     ${renderLocationItem(location, false)}
 
-    <ul class="locations" id="suggested-locations" hx-swap-oob="true">
+    <ul
+      hx-swap-oob="innerHTML"
+      class="locations"
+      id="suggested-locations"
+    >
       ${suggestedLocations
         .map((location) => renderLocationItem(location))
         .join("")}
@@ -103,6 +107,14 @@ app.post("/places", (req, res) => {
         .join("")}
     </ul>
   `);
+});
+
+app.get("/suggested-locations", (req, res) => {
+  const suggestedLocations = getSuggestedLocations();
+
+  res.send(
+    suggestedLocations.map((location) => renderLocationItem(location)).join("")
+  );
 });
 
 app.delete("/places/:id", (req, res) => {
