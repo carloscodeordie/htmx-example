@@ -7,6 +7,7 @@ import {
 import { renderNoteItem } from "./components/note-item";
 import renderLocationsPage from "./components/location";
 import renderLocationItem from "./components/locationItem";
+import { getSuggestedLocations } from "./utils/suggested-locations";
 const path = require("path");
 
 const app = express();
@@ -65,8 +66,15 @@ app.get("/locations", (req, res) => {
   const availableLocations = AVAILABLE_LOCATIONS.filter(
     (location) => !INTERESTING_LOCATIONS.includes(location)
   );
+  const suggestedLocations = getSuggestedLocations();
   // Return a fragment of the screen
-  res.send(renderLocationsPage(availableLocations, INTERESTING_LOCATIONS));
+  res.send(
+    renderLocationsPage(
+      suggestedLocations,
+      availableLocations,
+      INTERESTING_LOCATIONS
+    )
+  );
 });
 
 app.post("/places", (req, res) => {
@@ -78,8 +86,16 @@ app.post("/places", (req, res) => {
     (location) => !INTERESTING_LOCATIONS.includes(location)
   );
 
+  const suggestedLocations = getSuggestedLocations();
+
   res.send(`
     ${renderLocationItem(location, false)}
+
+    <ul class="locations" id="suggested-locations" hx-swap-oob="true">
+      ${suggestedLocations
+        .map((location) => renderLocationItem(location))
+        .join("")}
+    </ul>
 
     <ul id="available-locations" class="locations" hx-swap-oob="true">
       ${availableLocations

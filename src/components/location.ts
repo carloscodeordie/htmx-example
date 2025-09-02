@@ -1,6 +1,7 @@
 import renderLocationItem from "./locationItem";
 
 export default function renderLocationsPage(
+  suggestedLocations,
   availableLocations,
   interestingLocations
 ) {
@@ -17,6 +18,7 @@ export default function renderLocationsPage(
           crossorigin="anonymous"
           defer
         ></script>
+        <script src="js/main.js" defer></script>
       </head>
       <body>
         <header>
@@ -28,6 +30,15 @@ export default function renderLocationsPage(
           </p>
         </header>
         <main>
+          <section id="suggested-locations-section">
+            <h2>Suggested locations</h2>
+            <ul class="locations" id="suggested-locations">
+              ${suggestedLocations
+                .map((location) => renderLocationItem(location))
+                .join("")}
+            </ul>
+          </section>
+
           <section id="interesting-locations-section" class="locations-category">
             <h2>My Dream Locations</h2>
             <ul id="interesting-locations" class="locations">

@@ -12,6 +12,7 @@ export default function renderLocationItem(
       hx-target="#interesting-locations"
       hx-swap="beforeend show:#interesting-locations-section:top"
       hx-vals='{"locationId": "${location.id}"}'
+      data-action="add"
     `;
   } else {
     attributes = `
@@ -19,6 +20,7 @@ export default function renderLocationItem(
       hx-confirm="Are you sure you want to delete?"
       hx-target="closest li"
       hx-swap="outerHTML"
+      data-action="delete"
     `;
   }
 
