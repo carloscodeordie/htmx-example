@@ -8,6 +8,7 @@ import { renderNoteItem } from "./components/note-item";
 import renderLocationsPage from "./components/location";
 import renderLocationItem from "./components/locationItem";
 import { getSuggestedLocations } from "./utils/suggested-locations";
+import { LoginError } from "./models/interfaces";
 const path = require("path");
 
 const app = express();
@@ -27,6 +28,14 @@ app.get("/", (req, res) => {
 
 app.get("/notes/new", (req, res) => {
   res.render("notes");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/authenticated", (req, res) => {
+  res.render("authenticated");
 });
 
 app.get("/notes", (req, res) => {
@@ -135,6 +144,51 @@ app.delete("/places/:id", (req, res) => {
         .join("")}
     </ul>
   `);
+});
+
+app.post("/validate", (req, res) => {
+  if ("email" in req.body && !req.body.email.includes("@")) {
+    return res.send(`
+      E-Mail address is invalid.
+    `);
+  } else if ("email" in req.body && req.body.email.includes("@")) {
+    return res.send();
+  } else if ("password" in req.body && req.body.password.trim().length < 8) {
+    return res.send(`
+      Password must be at least 8 characters long.
+    `);
+  } else if ("password" in req.body && req.body.password.trim().length >= 8) {
+    return res.send();
+  }
+  res.send();
+});
+
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  let errors: LoginError = {};
+
+  if (!email || !email.includes("@")) {
+    errors.email = "Please enter a valid email address.";
+  }
+
+  if (!password || password.trim().length < 8) {
+    errors.password = "Password must be at least 8 characters long.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    res.send(`
+      <div id="extra-information">
+        <ul id="form-errors">
+          ${Object.keys(errors)
+            .map((key) => `<li>${errors[key]}</li>`)
+            .join("")}
+        </ul>
+      </div>
+    `);
+  }
+  res.send();
 });
 
 app.listen(port, () => {
