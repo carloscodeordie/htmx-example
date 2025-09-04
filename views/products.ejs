@@ -25,7 +25,11 @@
       <ul id="products">
         <% products.forEach((product) => { %>
         <article class="product">
-          <a href="/products/<%= product.id %>">
+          <a
+            hx-get="/products/<%= product.id %>"
+            hx-target="body"
+            hx-push-url="/products/<%= product.id %>"
+          >
             <img
               src="/images/<%= product.image %>"
               alt="<%= product.title %>"
