@@ -3,6 +3,7 @@ import {
   NOTES,
   INTERESTING_LOCATIONS,
   AVAILABLE_LOCATIONS,
+  PRODUCTS,
 } from "./utils/constants";
 import { renderNoteItem } from "./components/note-item";
 import renderLocationsPage from "./components/location";
@@ -188,8 +189,32 @@ app.post("/login", (req, res) => {
       </div>
     `);
   }
+
+  // Simulate a random server error
+  if (Math.random() > 0.8) {
+    res.setHeader("HX-Retarget", ".control");
+    res.setHeader("HX-Reswap", "beforebegin");
+    res.send(`
+      <p class="error">A server side error occurs. Please try again</p>  
+    `);
+  }
+
   res.setHeader("HX-Redirect", "/authenticated");
   res.send();
+});
+
+app.get("/products", (req, res) => {
+  res.render("products", {
+    products: PRODUCTS,
+  });
+});
+
+app.get("/products/:id", (req, res) => {
+  const product = PRODUCTS.find((product) => product.id === req.params.id);
+
+  res.render("product-details", {
+    product,
+  });
 });
 
 app.listen(port, () => {

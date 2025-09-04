@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= product.title %></title>
+    <link rel="stylesheet" href="/css/products.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
+      integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
+      crossorigin="anonymous"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header id="main-header">
+      <div id="main-title">
+        <a href="/">
+          <img src="/logo.png" alt="Elegant model" />
+          <h1>Elegant Clothing</h1>
+        </a>
+      </div>
+    </header>
+    <main id="product">
+      <header>
+        <img src="/images/<%= product.image %>" alt="${product.title}" />
+        <div>
+          <h1><%= product.title %></h1>
+          <p id="product-price">$<%= product.price %></p>
+          <form method="post" action="/cart">
+            <button>Add to Cart</button>
+          </form>
+        </div>
+      </header>
+      <p id="product-description"><%= product.description %></p>
+    </main>
+  </body>
+</html>

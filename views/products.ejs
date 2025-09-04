@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shop</title>
+    <link rel="stylesheet" href="/css/products.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"
+      integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm"
+      crossorigin="anonymous"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header id="main-header">
+      <div id="main-title">
+        <a href="/">
+          <img src="/logo.png" alt="Elegant model" />
+          <h1>Elegant Clothing</h1>
+        </a>
+      </div>
+    </header>
+    <main id="shop">
+      <h2>Elegant Clothing For Everyone</h2>
+
+      <ul id="products">
+        <% products.forEach((product) => { %>
+        <article class="product">
+          <a href="/products/<%= product.id %>">
+            <img
+              src="/images/<%= product.image %>"
+              alt="<%= product.title %>"
+            />
+            <div class="product-content">
+              <h3><%= product.title %></h3>
+              <p class="product-price"><%= product.price %></p>
+            </div>
+          </a>
+        </article>
+        <% }); %>
+      </ul>
+    </main>
+  </body>
+</html>
